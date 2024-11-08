@@ -7,6 +7,26 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Running Dev
+
+Use `composer run dev`
+
+### Try a Cache
+
+Try ValKey in a container: https://github.com/valkey-io/valkey-container
+
+But before that, try
+
+### Sail
+
+- `sail:install`
+- `sail:publish`
+- `sail:add`, which allows easy installation of
+  - redis
+  - mariadb
+  - pgsql
+  - and more, see `./vendor/laravel/sail/stubs/`
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
