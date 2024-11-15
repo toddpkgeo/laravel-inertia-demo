@@ -1,6 +1,7 @@
-import GuestLayout from "../Layouts/GuestLayout";
 import { PageProps } from "@/types";
 import { Head, Link } from "@inertiajs/react";
+import H2 from "../Components/Header2";
+import GuestLayout from "../Layouts/GuestLayout";
 
 export default function Welcome({
     laravelVersion,
@@ -19,19 +20,18 @@ export default function Welcome({
                                     href={route("mint-setup")}
                                     className="rounded-lg my-1 p-2 bg-neutral-200 dark:bg-neutral-800"
                                 >
-                                    <h2 className="text-xl font-semibold text-black dark:text-white">
-                                        Linux Mint Tips
-                                    </h2>
+                                    <H2>Linux Mint Tips</H2>
                                     <p>
                                         Some recommendations for a fresh install
                                     </p>
                                 </Link>
-                                <div className="rounded-lg my-1 p-2 bg-neutral-200 dark:bg-neutral-800">
-                                    <h2 className="text-xl font-semibold text-black dark:text-white">
-                                        Test 2
-                                    </h2>
-                                    <p>Testing two three four</p>
-                                </div>
+                                <Link
+                                    href={route("about-me")}
+                                    className="rounded-lg my-1 p-2 bg-neutral-200 dark:bg-neutral-800"
+                                >
+                                    <H2>About Me</H2>
+                                    <p>Todd Puckett: GIS Web Developer</p>
+                                </Link>
                             </div>
                         </main>
 

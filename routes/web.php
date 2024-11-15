@@ -15,4 +15,8 @@ Route::get('/mint-setup', function () {
     return Inertia::render('LinuxMintSetup');
 })->name('mint-setup');
 
+Route::get('/about-me', function () {
+    return Inertia::render('AboutMe');
+})->name('about-me');
+
 // require __DIR__.'/auth.php';
