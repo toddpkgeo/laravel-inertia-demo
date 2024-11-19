@@ -9,7 +9,8 @@ export default function Title({
         <h1
             {...props}
             className={
-                "text-xl font-semibold text-black dark:text-white" + className
+                "text-xl my-2 font-semibold text-black dark:text-white" +
+                className
             }
         >
             {children}

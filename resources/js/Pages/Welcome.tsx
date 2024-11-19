@@ -1,6 +1,8 @@
 import { PageProps } from "@/types";
 import { Head, Link } from "@inertiajs/react";
-import H2 from "../Components/Header2";
+import Anchor from "@/Components/Anchor";
+import SimpleCard from "@/Components/SimpleCard";
+import Title from "@/Components/Title";
 import GuestLayout from "../Layouts/GuestLayout";
 
 export default function Welcome({
@@ -9,37 +11,44 @@ export default function Welcome({
     return (
         <GuestLayout>
             <Head title="Welcome" />
-            <div className="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-                <div className="relative flex min-h-screen flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
-                    <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                        <header className="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3"></header>
-
-                        <main className="mt-6">
-                            <div className="flex flex-col items-center">
-                                <Link
-                                    href={route("mint-setup")}
-                                    className="rounded-lg my-1 p-2 bg-neutral-200 dark:bg-neutral-800"
-                                >
-                                    <H2>Linux Mint Tips</H2>
-                                    <p>
-                                        Some recommendations for a fresh install
-                                    </p>
-                                </Link>
-                                <Link
-                                    href={route("about-me")}
-                                    className="rounded-lg my-1 p-2 bg-neutral-200 dark:bg-neutral-800"
-                                >
-                                    <H2>About Me</H2>
-                                    <p>Todd Puckett: GIS Web Developer</p>
-                                </Link>
-                            </div>
-                        </main>
-
-                        <footer className="py-16 text-center text-sm text-black dark:text-white/70">
-                            A Laravel v{laravelVersion} demo
-                        </footer>
+            <div className="relative min-h-screen flex flex-col w-full px-6 md:w-96">
+                <header className="">
+                    <Title>Demo Content</Title>
+                    <p>
+                        This demo uses Laravel{" "}
+                        <Anchor
+                            href="https://inertiajs.com/pages"
+                            target="_blank"
+                        >
+                            Inertia
+                        </Anchor>{" "}
+                        as an adapter between a TS+React front-end and a{" "}
+                        <Anchor
+                            href="https://laravel.com/docs/11.x#why-laravel"
+                            target="_blank"
+                        >
+                            Laravel
+                        </Anchor>{" "}
+                        back-end.
+                    </p>
+                </header>
+                <main className="grow-0 mt-6">
+                    <div className="flex flex-col items-stretch">
+                        <SimpleCard
+                            href={route("about-me")}
+                            title="About Me"
+                            description="Todd Puckett: GIS Web Developer"
+                        ></SimpleCard>
+                        <SimpleCard
+                            href={route("mint-setup")}
+                            title="Linux Mint Tips"
+                            description="Some recommendations for a fresh install"
+                        ></SimpleCard>
                     </div>
-                </div>
+                </main>
+                <footer className="grow content-end py-3 text-center text-sm text-black/50 dark:text-white/50">
+                    Powered by Laravel v{laravelVersion}
+                </footer>
             </div>
         </GuestLayout>
     );

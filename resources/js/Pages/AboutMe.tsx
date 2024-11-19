@@ -1,8 +1,6 @@
 import GuestLayout from "../Layouts/GuestLayout";
-import { Head } from "@inertiajs/react";
-import Anchor from "@/Components/Anchor";
-import Code from "@/Components/Code";
-import H2 from "@/Components/Header2";
+import { Head, Link } from "@inertiajs/react";
+import ApplicationLogo from "@/Components/ApplicationLogo";
 import Title from "@/Components/Title";
 
 export default function AboutMe() {
@@ -16,6 +14,11 @@ export default function AboutMe() {
             <div className="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
                 <div className="relative flex min-h-screen flex-col items-center selection:bg-[#FF2D20] selection:text-white">
                     <div className="relative w-full max-w-2xl py-4 px-6 lg:max-w-7xl">
+                        <header className="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
+                            <Link href="/">
+                                <ApplicationLogo className="h-10 w-12 fill-current text-neutral-500" />
+                            </Link>
+                        </header>
                         <main>
                             <Title>About Me</Title>
                             <p>
