@@ -1,6 +1,6 @@
 import { AnchorHTMLAttributes } from "react";
 
-export default function Title({
+export default function Anchor({
     className = "",
     href,
     target = "_blank",
