@@ -20,12 +20,14 @@ export default function AboutMe() {
               </Link>
             </header>
             <main>
-              <Title>About Me</Title>
-              <p>
-                I am a full-stack web developer with a decade of GIS experience,
-                a background in Telecom Networks, and training in Civil
-                engineering.
-              </p>
+              <article className="prose prose-neutral prose-ul:list-square dark:prose-invert">
+                <Title>About Me</Title>
+                <p>
+                  I am a full-stack web developer with a decade of GIS
+                  experience, a background in Telecom Networks, and training in
+                  Civil engineering.
+                </p>
+              </article>
             </main>
           </div>
         </div>

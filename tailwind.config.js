@@ -16,7 +16,8 @@ export default {
         sans: ["Figtree", ...defaultTheme.fontFamily.sans],
       },
     },
+    listStyleType: { square: "square" },
   },
 
-  plugins: [forms],
+  plugins: [forms, require("@tailwindcss/typography")],
 };
