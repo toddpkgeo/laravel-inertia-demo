@@ -12,7 +12,7 @@ export default function LinuxMintSetup() {
       <Head title="Linux Mint Setup" />
       <div className="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
         <div className="relative flex min-h-screen flex-col items-center selection:bg-[#FF2D20] selection:text-white">
-          <div className="relative w-full max-w-2xl py-4 px-6 lg:max-w-7xl">
+          <div className="relative w-full max-w-2xl px-6 py-4 lg:max-w-7xl">
             <header className="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
               <Link href="/">
                 <ApplicationLogo className="h-10 w-12 fill-current text-neutral-500" />
@@ -46,13 +46,13 @@ export default function LinuxMintSetup() {
                 The install is simple enough that I don't have any tips, but I
                 do have some thoughts on the file system setup.
               </p>
-              <ul className="list-disc mt-3">
+              <ul className="mt-3 list-disc">
                 <li>Full disk encryption only helps if the laptop is off.</li>
                 <li>I can still use gpg or ccrypt on sensitive files.</li>
                 <li>It would be nice if BTRFS was an option</li>
-                <ul className="list-disc ml-3">
+                <ul className="ml-3 list-disc">
                   <li>I would love to see that and checkboxes for subvols</li>
-                  <ul className="list-disc ml-4">
+                  <ul className="ml-4 list-disc">
                     <li>
                       <Code>/home</Code>,<Code>/.snapshots</Code>,
                       <Code>/mnt</Code>,<Code>/run</Code>,<Code>/tmp</Code>,
@@ -64,7 +64,7 @@ export default function LinuxMintSetup() {
                     </li>
                   </ul>
                   <li>BTRFS would be nice for 2 reasons:</li>
-                  <ul className="list-disc ml-4">
+                  <ul className="ml-4 list-disc">
                     <li>Timeshift snapshots will be instant</li>
                     <li>
                       More subvols creates more granularity when choosing what
@@ -76,7 +76,7 @@ export default function LinuxMintSetup() {
               <H2>After Install</H2>
               <ul className="list-disc">
                 <li>Set up Timeshift snapshots</li>
-                <ul className="list-disc ml-3">
+                <ul className="ml-3 list-disc">
                   <li>
                     I include home dotfiles, exclude <Code>/root/**</Code>
                   </li>
@@ -89,13 +89,13 @@ export default function LinuxMintSetup() {
                   Verify that <Code>fstrim.timer</Code> is running, which is
                   good for SSD longevity
                 </li>
-                <ul className="list-disc ml-3">
+                <ul className="ml-3 list-disc">
                   <li>
                     <Code>systemctl status fstrim.timer</Code>
                   </li>
                 </ul>
                 <li>Remove asterisks from password prompts</li>
-                <ul className="list-disc ml-3">
+                <ul className="ml-3 list-disc">
                   <li>
                     normally I expect CLI password prompts to not echo anything
                   </li>
@@ -105,7 +105,7 @@ export default function LinuxMintSetup() {
                   </li>
                 </ul>
                 <li>Cinnamon Settings</li>
-                <ul className="list-disc ml-3">
+                <ul className="ml-3 list-disc">
                   <li>
                     Scrolling on Title bar can be set to adjust window opacity
                   </li>
@@ -120,16 +120,16 @@ export default function LinuxMintSetup() {
                   Confirm that printing just works by joining a new network with
                   a printer
                 </li>
-                <ul className="list-disc ml-3">
+                <ul className="ml-3 list-disc">
                   <li>Print a test page from the printer settings</li>
                 </ul>
                 <li>Run the Uncomplicated Firewall (UFW)</li>
-                <ul className="list-disc ml-3">
+                <ul className="ml-3 list-disc">
                   <li>I set it to deny all incoming connections</li>
                   <li>This is easy enough to configure later</li>
                 </ul>
                 <li>SSH</li>
-                <ul className="list-disc ml-3">
+                <ul className="ml-3 list-disc">
                   <li>
                     I make an <Code>ssh-list</Code> alias to remind me of
                     connections that I might want to use
@@ -139,7 +139,7 @@ export default function LinuxMintSetup() {
                     connections
                   </li>
                   <li>Consider creating keys like this:</li>
-                  <ul className="list-disc ml-4">
+                  <ul className="ml-4 list-disc">
                     <li>
                       <Code>
                         ssh-keygen -t rsa -C "for XYZ server" -f ~/.ssh/xyz_rsa
@@ -154,7 +154,7 @@ export default function LinuxMintSetup() {
                     <em>ASIDE</em>: Avoid SSH Agent if using more than a few
                     keys
                   </li>
-                  <ul className="list-disc ml-4">
+                  <ul className="ml-4 list-disc">
                     <li>
                       Too many keys can lead to a "too many attempts" error.
                     </li>

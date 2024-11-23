@@ -11,7 +11,7 @@ export default function Welcome({
   return (
     <GuestLayout>
       <Head title="Welcome" />
-      <div className="relative min-h-screen flex flex-col w-full px-6 md:w-96">
+      <div className="relative flex min-h-screen w-full flex-col px-6 md:w-96">
         <header className="">
           <Title>Demo Content</Title>
           <p>
@@ -29,7 +29,7 @@ export default function Welcome({
             back-end.
           </p>
         </header>
-        <main className="grow-0 mt-6">
+        <main className="mt-6 grow-0">
           <div className="flex flex-col items-stretch">
             <SimpleCard
               key="1"
