@@ -29,7 +29,7 @@ export default function Welcome({
             back-end.
           </p>
         </header>
-        <main className="mt-6 grow-0">
+        <main className="m-4 grow-0">
           <div className="flex flex-col items-stretch">
             <SimpleCard
               key="1"
