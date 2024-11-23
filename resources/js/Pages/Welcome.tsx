@@ -37,12 +37,12 @@ export default function Welcome({
               title="About Me"
               description="Todd Puckett: GIS Web Developer"
             ></SimpleCard>
-            {/* <SimpleCard
-                            key="2"
-                            href={route("last-project")}
-                            title="Most Recent Project"
-                            description="A collaborative map for fiber design"
-                        ></SimpleCard> */}
+            <SimpleCard
+              key="2"
+              href={route("last-project")}
+              title="Most Recent Project"
+              description="A collaborative map for fiber design"
+            ></SimpleCard>
             <SimpleCard
               key="3"
               href={route("mint-setup")}
