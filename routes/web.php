@@ -19,4 +19,8 @@ Route::get('/about-me', function () {
     return Inertia::render('AboutMe');
 })->name('about-me');
 
+Route::get('/last-project', function () {
+    return Inertia::render('LastProject');
+})->name('last-project');
+
 // require __DIR__.'/auth.php';
