@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'laravelVersion' => Application::VERSION,
-    ]);
+    return Inertia::render(
+        'Welcome', // [ 'laravelVersion' => Application::VERSION ]
+    );
 });
 
 Route::get('/mint-setup', function () {
