@@ -9,7 +9,8 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=merriweather-sans:300,600,700&display=swap" rel="stylesheet" />
+    <!-- Look up merriweather before changing weights here or the font-[weight] below -->
 
     <!-- Scripts -->
     @routes
@@ -18,7 +19,7 @@
     @inertiaHead
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased font-light">
     @inertia
 </body>
 
