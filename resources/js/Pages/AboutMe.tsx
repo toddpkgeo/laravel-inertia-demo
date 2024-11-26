@@ -1,7 +1,6 @@
 import GuestLayout from "../Layouts/GuestLayout";
-import { Head, Link } from "@inertiajs/react";
-import ApplicationLogo from "@/Components/ApplicationLogo";
-import H1 from "@/Components/Title";
+import { Head } from "@inertiajs/react";
+import AboutMeMd from "./AboutMe.mdx";
 
 export default function AboutMe() {
   // TODO:
@@ -12,11 +11,7 @@ export default function AboutMe() {
     <GuestLayout>
       <Head title="About Me" />
       <article className="prose prose-neutral prose-ul:list-square">
-        <H1>About Me</H1>
-        <p>
-          I am a full-stack web developer with a decade of GIS experience, a
-          background in Telecom Networks, and training in Civil engineering.
-        </p>
+        <AboutMeMd />
       </article>
     </GuestLayout>
   );
