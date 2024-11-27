@@ -1,6 +1,21 @@
-# Linux Mint Setup
+# Linux Setup
 
-These are my notes from when I installed Linux Mint 22 on my laptop.
+These are my notes from installing Linux Mint 22 on my laptop.
+
+## Previous Linux Systems
+
+For over a decade, I have mostly used Arch and Debian-based distros for my primary OS.
+
+At work, I was given a Windows laptop (and linux laptops before that), and I found that
+WSL with Debian and the Windows Terminal app worked pretty well. I had my favorite CLI utils,
+VS&nbsp;Code was nicely integrated, and file-system access between systems was very easy.
+
+At home, it's usually Arch on PC, and Ubuntu or Debian on anything else.
+
+## This Linux System
+
+This time, I'm starting with a relatively full-featured distro. Linux Mint 22
+is based on the latest Ubuntu LTS (24.04.1).
 
 ## Why Mint?
 
@@ -10,8 +25,7 @@ which could possibly waste another person's time.
 
 Mint handles the kinds of setup that are especially boring to me.
 Printing is unusually painless with this distro. It also ships without
-Ubuntu Snaps, which I'd rather not try to remove from any other Ubuntu
-distro.
+Ubuntu Snaps, which I'd rather not try to remove myself.
 
 That only applies to laptops, though. For Workstations and VMs, I'd
 rather build up my OS from a minimal base.
@@ -30,17 +44,66 @@ some thoughts on the file system setup.
   - BTRFS would be nice for 2 reasons:
     - Timeshift snapshots will be instant
     - More subvols creates more granularity when choosing what to snapshot
+  - However, I did find that Timeshift using rsync is fast enough for me
+    - and that Timeshift has good default exclusions in rsync mode
+
+## Packages
+
+Linux Mint comes with many packages out of the box, but here are some that
+I typically want to `apt install`:
+
+- `htop`
+- `dos2unix`
+- `git`
+- `fd-find`, `ripgrep`, `fzf`
+- `python3-venv`
+- `rustup` for rust, cargo, etc.
+- `unrar`
+- some GUI tools
+  - `kitty` terminal
+  - `keepassxc`
+  - `mpv`, which has a pseudo-gui
+  - `firefox`, `chromium`
+  - `inkscape`, `gimp`
+  - `qgis`
+- and without using `apt`, I would install
+  - "Google Chrome"
+    - if Chromium isn't enough
+    - download the deb pkg and double click it
+  - "VS Code"
+    - I've been using "Code - OSS" from github at home
+    - the executable is `code` either way
+  - `nvm` for npm, npx, node, etc
+    - get latest from github
+  - `nvim`
+    - get latest from github
+  - `php` and `composer`
+    - follow Laravel install instructions
+
+FYI: Mint includes these but Debian might not:
+
+- `man-db`
+- `bash-completion`
+- `command-not-found` (to suggest missing pkgs)
+- `build-essential` (for gcc, etc)
+- `file`, `less`, `xxd`
+- `curl`, `wget`
+- `openssh-client`, `openssl`
+- `procps` (for pkill, prgrep)
+- `net-tools` (for netstat)
+- `rsync`
+- `logrotate`
+- `vim`
+- `zip`, `unzip`, `zstd`
+- `tmux`
+  - to multiplex, which is handy on a headless system
+  - to disconnect and resume a session
 
 ## After Install
 
 - Set up Timeshift snapshots
   - I include home dotfiles, exclude `/root/**`
   - A good list of other exclusions apply by default. Click "Filter - Summary" to view.
-- Verify that `fstrim.timer` is running, which is good for SSD longevity
-  - `systemctl status fstrim.timer`
-- Remove asterisks from password prompts
-  - normally I expect CLI password prompts to not echo anything
-  - do this by removing the file `/etc/sudoers.d/0pwfeedback`
 - Cinnamon Settings
   - Scrolling on Title bar can be set to adjust window opacity
   - Use "Software Sources - Mirrors" and wait for some speed measurements to finish
@@ -48,9 +111,18 @@ some thoughts on the file system setup.
   - I Changed move/resize key from Alt to Super
 - Confirm that printing just works by joining a new network with a printer
   - Print a test page from the printer settings
+- Find Ulauncher settings
+  - Change the hotkey to be more unique
+  - I think the default was Ctrl-Space, which IDEs tend to use
 - Run the Uncomplicated Firewall (UFW)
   - I set it to deny all incoming connections
   - This is easy enough to configure later
+- Verify that `fstrim.timer` is running, which is good for SSD longevity
+  - `systemctl status fstrim.timer`
+- Remove asterisks from password prompts
+  - normally I expect CLI password prompts to not echo anything
+  - do this by removing the file `/etc/sudoers.d/0pwfeedback`
+    - I renamed it: `sudo mv /etc/sudoers.d/0pwfeedback{,.bak}`
 - SSH
   - I make an `ssh-list` alias to remind me of connections that I might want to use
   - I make other `ssh-*` aliases for these connections
@@ -69,3 +141,19 @@ some thoughts on the file system setup.
     - On other systems, I'd use [this script](https://github.com/git-for-windows/git/wiki/Auto-launching-ssh-agent-when-git-starts)
       and replace "id_rsa" with whatever space-separated keys you need.
   - Verify that SSH login works and password login doesn't
+- Make an XDG .local directory: `mkdir ~/.local`
+  - some apps might put files in non-standard locations if this doesn't exist
+  - add `$HOME/.local/bin` to your PATH; I set this in `~/.profile`
+- Copy dotfiles from other system or repo
+- For interactive CLI, consider oh-my-posh or oh-my-zsh
+- Install some programming utils
+  - see Packages above for more ideas
+- Install at least one Nerd Font
+  - these provide programming symbols and double-wide symbols
+  - look up Nerd Fonts, look for downloads
+  - install fonts with `fc-cache -fv`
+    - use before downloading anything to see what dirs it's scanning (can omit `-f` option)
+    - use after downloading and moving font files (can omit `-v` option)
+- Install a neovim distro (like LazyVim) to get some nice default features and settings
+  - I put the configs in `~/.config/lazyvim` instead of `~/.config/nvim`
+  - then make an alias to use `NVIM_APPNAME=lazyvim nvim`

@@ -46,7 +46,7 @@ export default function Welcome({
           <SimpleCard
             key="3"
             href={route("mint-setup")}
-            title="Linux Mint Tips"
+            title="Linux Tips"
             description="Some recommendations for a fresh install"
           ></SimpleCard>
         </div>
