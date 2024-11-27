@@ -1,17 +1,16 @@
 import GuestLayout from "../Layouts/GuestLayout";
 import { Head } from "@inertiajs/react";
 import AboutMeMd from "./AboutMe.mdx";
+import { type PageProps } from "@/types";
 
-export default function AboutMe() {
+export default function AboutMe({ fullname }: PageProps<{ fullname: string }>) {
   // TODO:
   // Date, anything else?
-  // See Static hosting services for metadata ideas
-  // Consider using a .env file to provide possibly sensitive info: name, city, email, experience, etc.
   return (
     <GuestLayout>
       <Head title="About Me" />
       <article className="prose prose-neutral prose-ul:list-square">
-        <AboutMeMd />
+        <AboutMeMd fullname={fullname} />
       </article>
     </GuestLayout>
   );

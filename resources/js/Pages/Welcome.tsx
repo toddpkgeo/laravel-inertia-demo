@@ -6,14 +6,15 @@ import H1 from "@/Components/Title";
 import GuestLayout from "../Layouts/GuestLayout";
 
 export default function Welcome({
-  laravelVersion,
-}: PageProps<{ laravelVersion: string }>) {
+  fullName,
+  myRole,
+}: PageProps<{ fullName: string; myRole: string }>) {
   return (
     <GuestLayout>
       <Head title="Welcome" />
       <div className="relative flex w-full flex-col px-6 md:w-96">
         <div className="mb-4">
-          <H1>Demo Content</H1>
+          <H1>{fullName}</H1>
           <p>
             This demo uses Laravel{" "}
             <Anchor href="https://inertiajs.com/pages" target="_blank">
@@ -34,7 +35,7 @@ export default function Welcome({
             key="1"
             href={route("about-me")}
             title="About Me"
-            description="GIS Web Developer"
+            description={myRole}
           ></SimpleCard>
           <SimpleCard
             key="2"

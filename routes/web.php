@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render(
-        'Welcome', // [ 'laravelVersion' => Application::VERSION ]
-    );
+    $nameAndRole = [
+        'fullName' => config('app.author_name'),
+        'myRole' => config('app.author_role')
+    ];
+    return Inertia::render('Welcome', $nameAndRole);
 });
 
 Route::get('/mint-setup', function () {
@@ -16,7 +18,11 @@ Route::get('/mint-setup', function () {
 })->name('mint-setup');
 
 Route::get('/about-me', function () {
-    return Inertia::render('AboutMe');
+    $nameAndRole = [
+        'fullName' => config('app.author_name'),
+        'myRole' => config('app.author_role')
+    ];
+    return Inertia::render('AboutMe', $nameAndRole);
 })->name('about-me');
 
 Route::get('/last-project', function () {

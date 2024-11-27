@@ -123,4 +123,8 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    // Other
+    'author_name' => env('AUTHOR_NAME', 'Example Name'),
+    'author_role' => env('AUTHOR_ROLE', 'Example Role'),
+
 ];
