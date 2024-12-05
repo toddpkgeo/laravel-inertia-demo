@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.prose a {
+  color: theme("textColor.blue.400");
+}
+.prose a:visited {
+  color: theme("textColor.violet.400");
+}
