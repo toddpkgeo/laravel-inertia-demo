@@ -12,7 +12,7 @@ export default function Welcome({
   return (
     <GuestLayout>
       <Head title="Welcome" />
-      <div className="relative flex w-full flex-col px-6 md:w-96">
+      <div className="relative flex w-full flex-col px-6 max-w-[70] text-balance">
         <div className="mb-4">
           <H1>{fullName}</H1>
           <p>
@@ -30,7 +30,7 @@ export default function Welcome({
             back-end.
           </p>
         </div>
-        <div className="flex flex-col items-stretch">
+        <div className="flex flex-col items-stretch md:w-96">
           <SimpleCard
             key="1"
             href={route("about-me")}

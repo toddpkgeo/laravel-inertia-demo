@@ -14,7 +14,7 @@ export default function Guest({ children }: PropsWithChildren) {
             </Link>
           )}
         </header>
-        <main>{children}</main>
+        <main className="grid flex-grow">{children}</main>
       </div>
     </div>
   );
