@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.prose {
+  @apply prose-invert;
+}
 .prose a {
   color: theme("textColor.blue.400");
 }
