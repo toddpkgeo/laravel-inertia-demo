@@ -45,6 +45,12 @@ export default function Welcome({
           ></SimpleCard>
           <SimpleCard
             key="3"
+            href={route("web-map")}
+            title="Interactive Map"
+            description="An example map"
+          ></SimpleCard>
+          <SimpleCard
+            key="4"
             href={route("mint-setup")}
             title="Linux Tips"
             description="Some recommendations for a fresh install"
