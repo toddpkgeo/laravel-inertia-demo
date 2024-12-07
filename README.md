@@ -8,6 +8,20 @@ on the back-end, and components as responses.
 First, see Laravel install instructions for installing `php` and `composer`.  
 Then try `composer run dev` from the project root.
 
+## Dev Setup
+
+- VS Code or Neovim
+- Extensions
+  - ESLint
+  - MDX
+  - PHP Intelephense
+  - Prettier
+  - Prettier-ESLint
+  - Tailwind CSS IntelliSense
+
+Check if ESLint is working. Check that autoformatting works, too.
+Prettier should sort tailwind classes, and that sorting can prevent issues.
+
 ### Sail
 
 - `sail:install`
