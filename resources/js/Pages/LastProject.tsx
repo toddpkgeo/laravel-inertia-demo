@@ -8,7 +8,7 @@ export default function LastProject() {
   return (
     <GuestLayout>
       <Head title="Most Recent Project" />
-      <article className="prose prose-neutral prose-ul:list-square">
+      <article className="prose prose-neutral prose-ul:list-square prose-code:before:content-none prose-code:after:content-none">
         <LastProjMd />
       </article>
     </GuestLayout>
