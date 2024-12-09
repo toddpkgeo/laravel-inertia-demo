@@ -33,7 +33,7 @@ Route::get('/last-project', function () {
 Route::get('/map', function () {
     return Inertia::render('WebMap', [
         'tzUrl' => Storage::disk('public')->url("geodata/tz/simplified-1000m-land-3857.geojson"),
-        // or "geodata/tz/timezones.geojson"
+        // 'tzUrl' => Storage::disk('public')->url("geodata/tz/ne_timezone_3857.geojson"),
     ]);
 })->name('web-map');
 
