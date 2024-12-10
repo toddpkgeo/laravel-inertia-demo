@@ -32,8 +32,8 @@ Route::get('/last-project', function () {
 
 Route::get('/map', function () {
     return Inertia::render('WebMap', [
-        'tzUrl' => Storage::disk('public')->url("geodata/tz/simplified-1000m-land-3857.geojson"),
-        // 'tzUrl' => Storage::disk('public')->url("geodata/tz/ne_timezone_3857.geojson"),
+        // 'tzUrl' => Storage::disk('private')->url("geodata/tz/ne_timezone_3857.geojson"),
+        'tzUrl' => Storage::disk('public')->url("demo/tz-bndy/simplified-usa-3857.geojson"),
     ]);
 })->name('web-map');
 

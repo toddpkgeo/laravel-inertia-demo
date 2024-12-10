@@ -1,20 +1,26 @@
 import "ol/ol.css";
-import { Head } from "@inertiajs/react";
-import { type PageProps } from "@/types";
-import TileLayer from "ol/layer/Tile";
-import { OSM } from "ol/source";
-import { Map, View } from "ol";
-import GeoJSON from "ol/format/GeoJSON";
-import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style.js";
-import { useEffect, useRef } from "react";
-import { transform } from "ol/proj";
 import Anchor from "@/Components/Anchor";
-import GuestLayout from "../Layouts/GuestLayout";
-import VectorSource from "ol/source/Vector";
-import VectorLayer from "ol/layer/Vector";
+import LegendPolySvg from "@/Components/LegendPolySvg";
+import { type PageProps } from "@/types";
+import { Head } from "@inertiajs/react";
+import { Map, View } from "ol";
 import { type FeatureLike } from "ol/Feature";
+import GeoJSON from "ol/format/GeoJSON";
+import TileLayer from "ol/layer/Tile";
+import VectorLayer from "ol/layer/Vector";
+import { transform } from "ol/proj";
+import { OSM } from "ol/source";
+import VectorSource from "ol/source/Vector";
+import { Circle as CircleStyle, Fill, Stroke, Style, Text } from "ol/style.js";
+import { useEffect, useRef } from "react";
+import GuestLayout from "../Layouts/GuestLayout";
 
-// move to new file?
+interface TimeZoneProps {
+  tzid: string;
+  no_dst: boolean;
+  tz_abbrev: string;
+  tz_offset_m: number;
+}
 
 export default function WebMap({ tzUrl }: PageProps & { tzUrl: string }) {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -27,7 +33,7 @@ export default function WebMap({ tzUrl }: PageProps & { tzUrl: string }) {
       source: new OSM(),
     });
     const mapView = new View({
-      center: transform([-100.2, 37.8], "EPSG:4326", "EPSG:3857"),
+      center: transform([-97.0, 42.0], "EPSG:4326", "EPSG:3857"),
       zoom: 4,
     });
     map = new Map({
@@ -38,22 +44,12 @@ export default function WebMap({ tzUrl }: PageProps & { tzUrl: string }) {
 
     tzBoundaryNeLayer(tzUrl)
       .then((layer) => {
-        // console.log(layer);
+        // console.log("add layer", layer);
         map.addLayer(layer);
       })
       .catch((e: unknown) => {
         console.log("make layer error:", e);
       });
-    // Could I get and filter this from backend?
-    //   fetch(tzUrl)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log("debug", ignore, data);
-    //       // todo: load layer, but it's 6MB
-    //     })
-    //     .catch((e: unknown) => {
-    //       console.log("fetch error:", e);
-    //     });
 
     return () => {
       map.setTarget(undefined);
@@ -68,65 +64,87 @@ export default function WebMap({ tzUrl }: PageProps & { tzUrl: string }) {
         <h2 className="pb-4 text-2xl font-bold">Map Demo</h2>
         <div
           ref={mapRef}
-          className="mx-0 min-h-[30rem] max-w-[80rem] flex-grow bg-slate-900 lg:mx-6"
-        ></div>
+          className="relative mx-0 min-h-[30rem] max-w-[80ch] flex-grow bg-slate-900 lg:mx-6"
+        >
+          <div className="absolute bottom-0 left-0 z-20 bg-slate-700">
+            <div className="flex flex-col p-2">
+              <h6 className="font-bold">Time Zones</h6>
+              <div className="my-2 flex align-middle">
+                <LegendPolySvg className="mr-2 w-6" fill="hsl(50, 50%, 70%)" />
+                <span>With DST</span>
+              </div>
+              <div className="my-2 flex align-middle">
+                <LegendPolySvg className="mr-2 w-6" fill="hsl(50, 0%, 70%)" />
+                <span>Without DST</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="prose mt-4">
-          <aside className="ml-6 italic">
-            The polygons are not yet uploaded. The next step is to either (1)
-            tile the vectors with a map server or (2) stream the polygons a few
-            features at a time.
-          </aside>
-          {/* NOTE: Remove this aside after solving that issue. */}
           <h3>Time Zones</h3>
           <p>
-            Simple timezone boundaries are available from{" "}
+            These timezone boundaries are derived from{" "}
+            <Anchor href="https://github.com/evansiroky/timezone-boundary-builder">
+              this source
+            </Anchor>
+            , which are accurate, provide standard TZ names, and include{" "}
+            <abbr title="Daylight Savings Time">DST</abbr> boundaries. They
+            unfortunately lack other attribution, and the file size and geometry
+            detail are excessive for this demo.
+          </p>
+          <figure className="p-1 outline outline-1 outline-neutral-800">
+            <img
+              src="/storage/demo/screen_tz_poly_az.png"
+              alt="TZ polygon screenshot of Arizona"
+            />
+            <figcaption>DST Boundaries can be surprising</figcaption>
+          </figure>
+          <p>
+            First, the geometry can be simplified and then reprojected for Web
+            Mercator. In QGIS, the Field Calculator can use snippets of Python,
+            so I added a couple of fields for labeling. This does increase file
+            size, but it&apos;s nice to have these values easily available. The
+            provided names are standard, like &quot;America/Los_Angeles&quot;,
+            and the Python snippet recognized every name.
+          </p>
+          <p>
+            Finally, I can trim the geometry around North America, then reduce
+            coordinate precision for a much better file size.
+          </p>
+          <p>
+            Other timezone boundaries are available from{" "}
             <Anchor href="https://www.naturalearthdata.com/downloads/10m-cultural-vectors/timezones/">
               Natural Earth
             </Anchor>
-            . These don&apos;t include the Arizona{" "}
-            <abbr title="Daylight Savings Time">DST</abbr> boundaries, which
-            would be nice to see. There is another source of boundaries that
-            does have that.
+            . These don&apos;t include the Arizona DST boundaries, but the
+            geometries would look nice for a time zone picker UI.
           </p>
-          <p>
-            <Anchor href="https://github.com/evansiroky/timezone-boundary-builder">
-              These TZ boundaries
-            </Anchor>{" "}
-            are better, but they lack attribution other than names. If I want to
-            symbolize which TZ boundaries do not observe DST, then I&apos;ll
-            need to add that myself.
-          </p>
-          <p>
-            I have the simple Natural Earth boundaries down to 6MB as
-            uncompressed JSON. I have the better TZ Boundaries down to 13MB.
-            Data like that should be served as Tiles. In the past, I used
-            Geoserver and PostgreSQL for this. I might do the same again, but
-            Geoserver feels excessive for a demo.
-          </p>
-          <p>Timezones that do not observe DST appear gray.</p>
-          <img
-            src="/storage/screen_tz_poly_az.png"
-            alt="TZ polygon screenshot"
-          />
+          <figure className="p-1 outline outline-1 outline-neutral-800">
+            <img
+              src="/storage/demo/screen-ne-tz-bndy-world.png"
+              alt="TZ polygon screenshot using Near Earth source"
+            />
+            <figcaption>
+              The Near Earth boundaries look clean but lack some detail
+            </figcaption>
+          </figure>
         </div>
       </div>
     </GuestLayout>
   );
 }
+// TODO:
+// If world, is "no_dst" correct in Asia?
+// Show py function, which is in doc/geo/.
+// Consider vector tiles, but that needs Geoserver, styles, labels, DB, docker-compose, ...
 
 async function tzBoundaryNeLayer(dataUrl: string) {
   const data = await fetch(dataUrl);
-  const geojson = await data.json() as unknown;
+  const geojson: unknown = await data.json();
 
-  // const mapExtent = [
-  //   ...transform([-180, -90], "EPSG:4326", "EPSG:3857"),
-  //   ...transform([180, 90], "EPSG:4326", "EPSG:3857"),
-  // ];
   const vecSource = new VectorSource({
-    features: new GeoJSON().readFeatures(geojson) /* .filter((feat) => {
-      const ext = feat.getGeometry()?.getExtent(); // [minX, minY, maxX, maxY]
-      return ext && containsExtent(mapExtent, ext);
-    }) */,
+    features: new GeoJSON().readFeatures(geojson),
   });
 
   return new VectorLayer({
@@ -135,7 +153,7 @@ async function tzBoundaryNeLayer(dataUrl: string) {
   });
 }
 
-function tzStyle(feature: FeatureLike, resolution: number) {
+function tzStyle(feature: FeatureLike) {
   const geomType = feature.getGeometry()?.getType() ?? "";
 
   const dot = new CircleStyle({
@@ -145,15 +163,24 @@ function tzStyle(feature: FeatureLike, resolution: number) {
   });
 
   if (geomType.endsWith("Polygon")) {
-    const noDsl = feature.getProperties().no_dst === true;
-    const sat = noDsl ? "0%" : "60%";
+    const featProps = feature.getProperties() as TimeZoneProps;
+    const sat = featProps.no_dst ? "0%" : "60%";
+    const offsetHr = (featProps.tz_offset_m / 60).toFixed(2);
+
     return new Style({
       fill: new Fill({
-        color: `hsl(50, ${sat}, 60%, 0.2 )`,
+        color: `hsl(50, ${sat}, 60%, 0.33 )`,
       }),
       stroke: new Stroke({ color: "hsl(20, 10%, 10%)", width: 2 }),
+      text: new Text({
+        text: `${featProps.tz_abbrev}\n${offsetHr}`,
+        textAlign: "center",
+        overflow: false,
+      }),
     });
   }
   console.log("other geom type", geomType);
   return new Style({ image: dot });
 }
+
+// Note: Geom Extents in ol are expressed as // [minX, minY, maxX, maxY]
