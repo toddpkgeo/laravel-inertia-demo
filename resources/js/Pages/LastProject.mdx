@@ -2,44 +2,44 @@
 
 For 7 years, I worked on a feature-rich, interactive web map.
 
+It was a private, internal app, so I'll just describe it here.
+
 ## Web Map
 
 Having worked on this longer than anyone else, I added or improved almost
 every feature:
 
 - Home page with Login and list of Projects
-  - Each Project has an interactive map for a certain internal group
-  - Notifications to announce new features
-- Each map is a **Leaflet** map that
-  - gets map tiles from **GeoServer**
+- Each project is a **Leaflet** map
+  - for collaborative editing of most features
+  - that gets map tiles from **GeoServer**
   - gets data from **PostgreSQL**, **PostGIS**
-  - allows **collaborative editing** of most features
-  - provides feature **snapping** options
+  - provides feature snapping options
   - keyboard shortcuts
-  - toggles layer groups
-  - remembers layer selections
-  - has Address Search, and Reverse Geocode (what address is here)
-  - shows Street View
-  - shows attributes for selected features in a Table
-  - allows **multiple edits** via Table
-  - shows related data and images
+  - layer group toggles
+  - layer selection preferences
+  - Address Search, and Reverse Geocode (what address is here)
+  - Street View
+  - attributes for selected features in a Table
+  - multiple edits via Table
+  - related data and images
   - attribute search and filter
   - zoom to feature
   - encode view extents in URL fragment
   - share feature URL
+- Hosted on **Azure** with **nginx**, and **docker-compose**
 - Performance improvements with
-  - caching with Redis
+  - Redis cache
   - connection pooling
-  - load balancing Geoserver instances with nginx
+  - load balancing Geoserver instances with **nginx**
   - batching large selections
   - improving slow functions
 - Some maps have OSP Fiber management features:
   - **Splicing UI** for fiber strands
   - **Signal Tracing**
   - **Splice Sheet** exports
-  - Address and Terminal imports
+  - Address and Terminal **imports**
 - An **API** to support
-  - some map features
   - a mobile client
-- Caching with Redis
-- Hosted on Azure with nginx, and docker-compose
+  - some map features
+- Notifications to announce new features
