@@ -17,19 +17,14 @@ Then try `composer run dev` from the project root.
 
 ## Dev Setup
 
-- VS Code or Neovim
-- Extensions
-  - ESLint
-  - MDX
-  - PHP Intelephense
-  - Prettier
-  - Prettier-ESLint
-  - Tailwind CSS IntelliSense
+- See `.vscode/extensions.json` for recommended extensions.
 
 Check if ESLint is working. Check that autoformatting works, too.
 Prettier should sort tailwind classes, and that sorting can prevent issues.
 
 ### Sail
+
+To use Sail, try these Artisan commands:
 
 - `sail:install`
 - `sail:publish`
@@ -39,6 +34,4 @@ Prettier should sort tailwind classes, and that sorting can prevent issues.
   - pgsql
   - and more, see `./vendor/laravel/sail/stubs/`
 
-## Try a Cache
-
-Try ValKey in a container: https://github.com/valkey-io/valkey-container
+<!--note: See if ValKey is a good alternative to Redis-->
