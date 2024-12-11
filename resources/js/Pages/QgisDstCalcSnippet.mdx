@@ -1,0 +1,68 @@
+```py
+# QGIS Field Calc - Function Editor
+# ...
+from qgis.core import *
+from qgis.gui import *
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo, available_timezones
+
+def check_tz_name(tz_name: str) -> bool:
+    if tz_name not in available_timezones():
+        return False
+
+    return True
+
+@qgsfunction(group='Custom', referenced_columns=[])
+def no_dst(tz_name):
+    """
+    Check is timezone does not observe DST.
+    <h2>Example usage:</h2>
+    <ul>
+      <li>no_dst('America/Los_Angeles') -> True</li>
+      <li>no_dst("tzid") -> True</li>
+    </ul>
+    """
+
+    if not check_tz_name(tz_name):
+        return False
+
+    current_year: int = datetime.now().year
+    tz = ZoneInfo(tz_name)
+    dsts: list[int] = []
+
+    for i in range(3):
+        # Checking 3 different months just in case any DST doesn't last long.
+        dt: datetime = datetime(year=check_year, month=i * 4 + 1, day=1)
+        tdelta: timedelta | None = tz.dst(dt)
+        dsts.append(-1 if tdelta is None else tdelta.seconds)
+
+    if all((i == -1 for i in dsts)):
+        print(f"Warning: Unknown DST offsets for {tz_name}")
+
+    if all((i == 0 for i in dsts)):
+        return True
+
+    return False
+
+
+@qgsfunction(group='Custom', referenced_columns=[])
+def tz_abbrev(tz_name: str) -> str:
+    if tz_name not in available_timezones():
+        return "??"
+
+    tz = ZoneInfo(tz_name)
+    dt = datetime(2024, 1, 2, tzinfo=tz)
+
+    return dt.tzname() or "??"
+
+@qgsfunction(group='Custom', referenced_columns=[])
+def tz_offset_m(tz_name: str) -> int:
+    if tz_name not in available_timezones():
+        return -999
+
+    tz = ZoneInfo(tz_name)
+    dt = datetime(2024, 1, 2, tzinfo=tz)
+    offset = tz.fromutc(dt) - dt
+
+    return int(offset.total_seconds() / 60)
+```
