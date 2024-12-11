@@ -3,6 +3,13 @@
 Typescript and React on the front-end, many features out of the box
 on the back-end, and components as responses.
 
+## Demo
+
+![OpenLayers Map](storage/app/public/demo/screen-ol-tz-map.png)
+
+This includes some articles, and a TimeZone map. Most content can be
+found in `resources/js/`.
+
 ## Running Dev
 
 First, see Laravel install instructions for installing `php` and `composer`.  

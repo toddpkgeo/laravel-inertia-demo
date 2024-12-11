@@ -1,6 +1,12 @@
 import "ol/ol.css";
+import "../../css/code-hl-rehype.css";
 import Anchor from "@/Components/Anchor";
 import LegendPolySvg from "@/Components/LegendPolySvg";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
 import { type PageProps } from "@/types";
 import { Head } from "@inertiajs/react";
 import { Map, View } from "ol";
@@ -14,6 +20,7 @@ import VectorSource from "ol/source/Vector";
 import { Circle as CircleStyle, Fill, Stroke, Style, Text } from "ol/style.js";
 import { useEffect, useRef } from "react";
 import GuestLayout from "../Layouts/GuestLayout";
+import QgisDstCalcSnippet from "./QgisDstCalcSnippet.mdx";
 
 interface TimeZoneProps {
   tzid: string;
@@ -83,12 +90,15 @@ export default function WebMap({ tzUrl }: PageProps & { tzUrl: string }) {
 
         <div className="prose mt-4">
           <h3>Time Zones</h3>
+          <p> I found two sources of timezone boundaries</p>
+          <h4>OSM Boundaries</h4>
           <p>
             These timezone boundaries are derived from{" "}
             <Anchor href="https://github.com/evansiroky/timezone-boundary-builder">
               this source
             </Anchor>
-            , which are accurate, provide standard TZ names, and include{" "}
+            , which are compiled from <abbr title="Open Street Map">OSM</abbr>{" "}
+            data. They provide standard TZ names, and include{" "}
             <abbr title="Daylight Savings Time">DST</abbr> boundaries. They
             unfortunately lack other attribution, and the file size and geometry
             detail are excessive for this demo.
@@ -112,12 +122,34 @@ export default function WebMap({ tzUrl }: PageProps & { tzUrl: string }) {
             Finally, I can trim the geometry around North America, then reduce
             coordinate precision for a much better file size.
           </p>
+
+          <Disclosure>
+            {({ open }) => (
+              <>
+                <DisclosureButton className="rounded-md bg-neutral-900 p-1 outline outline-2 outline-neutral-700">
+                  {open ? "Hide" : "Show"} Python Field Calcs
+                </DisclosureButton>
+                <DisclosurePanel
+                  transition
+                  className="origin-top border-l border-slate-700 pl-2 duration-200 ease-in data-[closed]:-translate-y-4 data-[closed]:opacity-0"
+                >
+                  <p>
+                    Three functions are defined and decorated with{" "}
+                    <code>@qgsfunction</code>
+                  </p>
+                  <QgisDstCalcSnippet />
+                </DisclosurePanel>
+              </>
+            )}
+          </Disclosure>
+
+          <h4>Near Earth Boundaries</h4>
           <p>
             Other timezone boundaries are available from{" "}
             <Anchor href="https://www.naturalearthdata.com/downloads/10m-cultural-vectors/timezones/">
               Natural Earth
             </Anchor>
-            . These don&apos;t include the Arizona DST boundaries, but the
+            . These don&apos;t include DST boundaries like in Arizona, but the
             geometries would look nice for a time zone picker UI.
           </p>
           <figure className="p-1 outline outline-1 outline-neutral-800">
@@ -175,6 +207,7 @@ function tzStyle(feature: FeatureLike) {
       text: new Text({
         text: `${featProps.tz_abbrev}\n${offsetHr}`,
         textAlign: "center",
+        font: "14px sans-serif",
         overflow: false,
       }),
     });
