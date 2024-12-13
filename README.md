@@ -17,30 +17,23 @@ TSX components and pages, `resources/` also contains MDX snippets like these:
 ## Local Dev
 
 <details><summary>How to run locally</summary>
-<p>Install <code>npm</code> either by getting it
-  <a
-    href="https://nodejs.org/en" target="_blank" rel="noreferrer"
-  >here</a> or by using <code>nvm</code> <a
-    href="https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating"
-    target="_blank" rel="noreferrer"
-  >like this</a>.
-</p>
-<p>Then, install composer
-  <a target="_blank" rel="noreferrer"
-    href="https://laravel.com/docs/11.x#installing-php"
-  >like this</a>
-  (Specifically, look for a command that fetches
-  from "https://php.new").
-</p>
-<p>Install dependencies:</p>
-<pre>
-  composer install
-  npm ci
-</pre>
-<p>Finally, run the app:</p>
-<pre>
-  composer run dev
-</pre>
+
+Install `npm` either by getting it
+[here](https://nodejs.org/en)
+or by using `nvm` [like this](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating).
+
+Then, install composer [like this](https://laravel.com/docs/11.x#installing-php)
+(Specifically, look for a command that fetches from "https://php.new").
+
+Then, install dependencies:
+
+    composer install
+    npm ci
+
+Finally, run the app:
+
+    composer run dev
+
 </details>
 
 <details><summary>Dev setup</summary>
@@ -65,6 +58,5 @@ to help containerize the app and add services.
   - and more, see `./vendor/laravel/sail/stubs/`
 
 </details>
-
 
 <!--note: See if ValKey is a good alternative to Redis-->
