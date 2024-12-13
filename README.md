@@ -8,7 +8,11 @@ on the back-end, and components as responses.
 ![OpenLayers Map](storage/app/public/demo/screen-ol-tz-map.png)
 
 This includes some articles, and a TimeZone map. Most content can be
-found in `resources/js/`.
+found in `resources/js/`. Look for MDX files such as
+
+- [About Me](resources/js/Pages/AboutMe.mdx)
+- [About my last project](resources/js/Pages/LastProject.mdx)
+- [Linux Tips](resources/js/Pages/LinuxMintSetup.mdx)
 
 ## Running Dev
 
