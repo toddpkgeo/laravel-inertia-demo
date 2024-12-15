@@ -1,18 +1,18 @@
 # Laravel Inertia
 
-**Typescript** and **React** on the front-end, a feature-rich back-end,
-and components as responses.
+![TypeScript](https://img.shields.io/badge/TypeScript-gray?logo=typescript)
+![React](https://img.shields.io/badge/React-gray?logo=react)
+![MDX](https://img.shields.io/badge/MDX-gray?logo=mdx)
+![Laravel](https://img.shields.io/badge/Laravel-gray?logo=laravel)
 
-## Demo
-
-![OpenLayers Map](storage/app/public/demo/screen-ol-tz-map.png)
-
-This includes some articles, and a TimeZone map. In addition to
-TSX components and pages, `resources/` also contains MDX snippets like these:
+MDX is nice for snippets like these:
 
 - [About Me](resources/js/Pages/AboutMe.mdx)
 - [About my last project](resources/js/Pages/LastProject.mdx)
 - [Linux Tips](resources/js/Pages/LinuxMintSetup.mdx)
+
+Inertia is great for server-rendered components, which speeds up
+page requests.
 
 ## Local Dev
 
