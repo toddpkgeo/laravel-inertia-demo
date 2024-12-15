@@ -29,6 +29,8 @@ Then, install dependencies:
 
     composer install
     npm ci
+    php artisan migrate
+    php artisan db:seed
 
 Finally, run the app:
 
