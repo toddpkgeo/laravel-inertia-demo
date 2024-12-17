@@ -157,3 +157,19 @@ FYI: Mint includes these but Debian might not:
 - Install a neovim distro (like LazyVim) to get some nice default features and settings
   - I put the configs in `~/.config/lazyvim` instead of `~/.config/nvim`
   - then make an alias to use `NVIM_APPNAME=lazyvim nvim`
+
+## Docker
+
+To install docker, I followed these [apt repository instructions](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
+but with this substitution:
+
+    # Replace this
+    $(. /etc/os-release && echo "$VERSION_CODENAME")
+    # with this
+    $(. /etc/os-release && echo "$UBUNTU_CODENAME")
+
+On Mint 22, the value here should be "noble" and not "wilma."
+
+See all available versions with
+
+    apt policy docker-ce
