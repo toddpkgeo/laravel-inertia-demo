@@ -5,14 +5,12 @@
 ![MDX](https://img.shields.io/badge/MDX-gray?logo=mdx)
 ![Laravel](https://img.shields.io/badge/Laravel-gray?logo=laravel)
 
-MDX is nice for snippets like these:
+In this demo, I try server-rendered components, a timezone map with OpenLayers,
+and MDX snippets like these:
 
 - [About Me](resources/js/Pages/AboutMe.mdx)
 - [About my last project](resources/js/Pages/LastProject.mdx)
 - [Linux Tips](resources/js/Pages/LinuxMintSetup.mdx)
-
-Inertia is great for server-rendered components, which speeds up
-page requests.
 
 ## Local Dev
 
